@@ -1,4 +1,7 @@
 schema: spec-driven
+context: |
+  Purpose: A series of Microsoft MakeCode python examples to help teach children to code using a Theta Robot.
+  We use the Theta MakeCode library: https://github.com/4tronix/Theta , example usage here: https://makecode.microbit.org/pkg/4tronix/Theta
 
 # Project context (optional)
 # This is shown to AI when creating artifacts.
