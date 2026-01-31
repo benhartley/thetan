@@ -18,6 +18,7 @@ MakeCode is a block-based and text-based programming environment for micro:bit. 
 The Theta robot uses the `theta` MakeCode extension. Documentation:
 - Package page: https://makecode.microbit.org/pkg/4tronix/Theta
 - GitHub source: https://github.com/4tronix/Theta
+- **Local reference**: `reference/theta.ts` - Full source code of the MakeCode package with all available functions, enums, and documentation comments
 
 #### Key API Functions
 
@@ -81,8 +82,9 @@ theta.convertRGB(50, 100, 200)      # Create color from RGB values
 
 ### Important Rules for Examples
 
-- DO NOT invent or guess API functions - always refer to the documentation above
-- Example files go in `examples/` directory with naming like `1-hello.py`, `2-turns.py`, etc.
+- DO NOT invent or guess API functions - always refer to the documentation above or `reference/theta.ts`
+- Student code files go in `students/` directory with naming like `1-hello.py`, `2-turns.py`, etc.
+- Teacher guides go in `teachers/` directory with matching names like `1-hello.md`, `2-turns.md`, etc.
 - MakeCode Python doesn't need imports - `theta` and enums are globally available
 - LSP errors about undefined `theta` are expected (code runs on micro:bit, not PC)
 - Speed values are 0-100, durations are in milliseconds
