@@ -22,72 +22,72 @@ The Theta robot uses the `theta` MakeCode extension. Documentation:
 
 #### MakeCode Python Naming Conventions
 
-**IMPORTANT**: MakeCode Python uses different naming conventions than the TypeScript source:
-- **Methods**: `snake_case` (e.g., `robot_go_ms` not `robotGoms`)
-- **Enum values**: `UPPERCASE` (e.g., `RxDirection.FORWARD` not `RXDirection.Forward`)
-- **Enum types**: `PascalCase` with `Rx` prefix (e.g., `RxDirection`, `RxStopMode`)
+**IMPORTANT**: MakeCode Python uses these naming conventions (matching the TypeScript source):
+- **Methods**: `snake_case` (e.g., `robot_goms` not `robotGoms`)
+- **Enum types**: `RX` prefix with PascalCase (e.g., `RXDirection`, `RXStopMode`)
+- **Enum values**: `PascalCase` (e.g., `RXDirection.Forward` not `RXDirection.FORWARD`)
 
-The `reference/theta.ts` file shows TypeScript/JavaScript naming. When writing Python code, convert to the conventions above.
+The `reference/theta.ts` file shows TypeScript/JavaScript naming. When writing Python code, convert methods to snake_case but keep enum types and values as shown in TypeScript.
 
 #### Key API Functions
 
 **Movement:**
 ```python
-theta.robot_go(RxDirection.FORWARD, 60)              # Move forever at speed 0-100
-theta.robot_go_ms(RxDirection.REVERSE, 100, 2000)    # Move for milliseconds
-theta.robot_rotate(RxRobotDirection.LEFT, 70)        # Spin in place
-theta.robot_rotate_ms(RxRobotDirection.RIGHT, 50, 400)  # Spin for milliseconds
+theta.robot_go(RXDirection.Forward, 60)              # Move forever at speed 0-100
+theta.robot_goms(RXDirection.Reverse, 100, 2000)     # Move for milliseconds
+theta.robot_rotate(RXRobotDirection.Left, 70)        # Spin in place
+theta.robot_rotatems(RXRobotDirection.Right, 50, 400)  # Spin for milliseconds
 ```
 
 **Stopping:**
 ```python
-theta.robot_stop(RxStopMode.COAST)  # Slow coast to stop
-theta.robot_stop(RxStopMode.BRAKE)  # Rapid brake stop
+theta.robot_stop(RXStopMode.Coast)  # Slow coast to stop
+theta.robot_stop(RXStopMode.Brake)  # Rapid brake stop
 ```
 
 **Individual motors:**
 ```python
-theta.motor_move(RxMotor.LEFT, RxDirection.FORWARD, 40)
-theta.motor_move(RxMotor.RIGHT, RxDirection.FORWARD, 70)
-theta.motor_move(RxMotor.BOTH, RxDirection.FORWARD, 60)
+theta.motor_move(RXMotor.Left, RXDirection.Forward, 40)
+theta.motor_move(RXMotor.Right, RXDirection.Forward, 70)
+theta.motor_move(RXMotor.Both, RXDirection.Forward, 60)
 ```
 
 **Motor bias (correct veering):**
 ```python
-theta.motor_bias(RxRobotDirection.LEFT, 5)   # Bias left by 5%
-theta.motor_bias(RxRobotDirection.RIGHT, 15) # Bias right by 15%
+theta.motor_bias(RXRobotDirection.Left, 5)   # Bias left by 5%
+theta.motor_bias(RXRobotDirection.Right, 15) # Bias right by 15%
 ```
 
 **Sonar (optional sensor):**
 ```python
-theta.read_sonar(RxPingUnit.CENTIMETERS)
-theta.read_sonar(RxPingUnit.INCHES)
-theta.read_sonar(RxPingUnit.MICRO_SECONDS)
+theta.read_sonar(RXPingUnit.Centimeters)
+theta.read_sonar(RXPingUnit.Inches)
+theta.read_sonar(RXPingUnit.MicroSeconds)
 ```
 
 **FireLeds (14 RGB LEDs):**
 ```python
 theta.leds_color(0x00FF00)           # Set all to green (hex)
-theta.leds_color(RxColors.GREEN)     # Set all to green (enum)
+theta.leds_color(RXColors.Green)     # Set all to green (enum)
 theta.led_clear()                    # Clear all
 theta.set_pixel(3, 0xff0000)         # Set LED 3 to red
 theta.led_rainbow(True)              # Rainbow pattern
 theta.led_brightness(100)            # Set brightness (0-255, default 40)
 theta.led_shift(False)               # Shift LEDs
 theta.led_rotate(True)               # Rotate LEDs
-theta.set_update_mode(RxMode.MANUAL) # Manual or Auto update mode
+theta.set_update_mode(RXMode.Manual) # Manual or Auto update mode
 theta.convert_rgb(50, 100, 200)      # Create color from RGB values
 ```
 
 #### Enums
 
-- `RxDirection`: `FORWARD`, `REVERSE`
-- `RxRobotDirection`: `LEFT`, `RIGHT`
-- `RxStopMode`: `COAST`, `BRAKE`
-- `RxMotor`: `LEFT`, `RIGHT`, `BOTH`
-- `RxPingUnit`: `CENTIMETERS`, `INCHES`, `MICRO_SECONDS`
-- `RxColors`: `RED`, `GREEN`, `BLUE`, etc.
-- `RxMode`: `MANUAL`, `AUTO`
+- `RXDirection`: `Forward`, `Reverse`
+- `RXRobotDirection`: `Left`, `Right`
+- `RXStopMode`: `Coast`, `Brake`
+- `RXMotor`: `Left`, `Right`, `Both`
+- `RXPingUnit`: `Centimeters`, `Inches`, `MicroSeconds`
+- `RXColors`: `Red`, `Green`, `Blue`, etc.
+- `RXMode`: `Manual`, `Auto`
 
 ### Important Rules for Examples
 
