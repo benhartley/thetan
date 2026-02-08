@@ -20,74 +20,126 @@ The Theta robot uses the `theta` MakeCode extension. Documentation:
 - GitHub source: https://github.com/4tronix/Theta
 - **Local reference**: `reference/theta.ts` - Full source code of the MakeCode package with all available functions, enums, and documentation comments
 
+#### MakeCode Python Naming Conventions
+
+**IMPORTANT**: MakeCode Python uses different naming conventions than the TypeScript source:
+- **Methods**: `snake_case` (e.g., `robot_go_ms` not `robotGoms`)
+- **Enum values**: `UPPERCASE` (e.g., `RxDirection.FORWARD` not `RXDirection.Forward`)
+- **Enum types**: `PascalCase` with `Rx` prefix (e.g., `RxDirection`, `RxStopMode`)
+
+The `reference/theta.ts` file shows TypeScript/JavaScript naming. When writing Python code, convert to the conventions above.
+
 #### Key API Functions
 
 **Movement:**
 ```python
-theta.robotGo(RXDirection.Forward, 60)           # Move forever at speed 0-100
-theta.robotGoms(RXDirection.Reverse, 100, 2000)  # Move for milliseconds
-theta.robotRotate(RXRobotDirection.Left, 70)     # Spin in place
-theta.robotRotatems(RXRobotDirection.Right, 50, 400)  # Spin for milliseconds
+theta.robot_go(RxDirection.FORWARD, 60)              # Move forever at speed 0-100
+theta.robot_go_ms(RxDirection.REVERSE, 100, 2000)    # Move for milliseconds
+theta.robot_rotate(RxRobotDirection.LEFT, 70)        # Spin in place
+theta.robot_rotate_ms(RxRobotDirection.RIGHT, 50, 400)  # Spin for milliseconds
 ```
 
 **Stopping:**
 ```python
-theta.robotStop(RXStopMode.Coast)  # Slow coast to stop
-theta.robotStop(RXStopMode.Brake)  # Rapid brake stop
+theta.robot_stop(RxStopMode.COAST)  # Slow coast to stop
+theta.robot_stop(RxStopMode.BRAKE)  # Rapid brake stop
 ```
 
 **Individual motors:**
 ```python
-theta.motorMove(RXMotor.Left, RXDirection.Forward, 40)
-theta.motorMove(RXMotor.Right, RXDirection.Forward, 70)
-theta.motorMove(RXMotor.Both, RXDirection.Forward, 60)
+theta.motor_move(RxMotor.LEFT, RxDirection.FORWARD, 40)
+theta.motor_move(RxMotor.RIGHT, RxDirection.FORWARD, 70)
+theta.motor_move(RxMotor.BOTH, RxDirection.FORWARD, 60)
 ```
 
 **Motor bias (correct veering):**
 ```python
-theta.motorBias(RXRobotDirection.Left, 5)   # Bias left by 5%
-theta.motorBias(RXRobotDirection.Right, 15) # Bias right by 15%
+theta.motor_bias(RxRobotDirection.LEFT, 5)   # Bias left by 5%
+theta.motor_bias(RxRobotDirection.RIGHT, 15) # Bias right by 15%
 ```
 
 **Sonar (optional sensor):**
 ```python
-theta.readSonar(RXPingUnit.Centimeters)
-theta.readSonar(RXPingUnit.Inches)
-theta.readSonar(RXPingUnit.MicroSeconds)
+theta.read_sonar(RxPingUnit.CENTIMETERS)
+theta.read_sonar(RxPingUnit.INCHES)
+theta.read_sonar(RxPingUnit.MICRO_SECONDS)
 ```
 
 **FireLeds (14 RGB LEDs):**
 ```python
-theta.ledsColor(0x00FF00)           # Set all to green (hex)
-theta.ledsColor(RXColors.Green)     # Set all to green (enum)
-theta.ledClear()                    # Clear all
-theta.setPixel(3, 0xff0000)         # Set LED 3 to red
-theta.ledRainbow(True)              # Rainbow pattern
-theta.ledBrightness(100)            # Set brightness (0-255, default 40)
-theta.ledShift(False)               # Shift LEDs
-theta.ledRotate(True)               # Rotate LEDs
-theta.setUpdateMode(RXMode.Manual)  # Manual or Auto update mode
-theta.convertRGB(50, 100, 200)      # Create color from RGB values
+theta.leds_color(0x00FF00)           # Set all to green (hex)
+theta.leds_color(RxColors.GREEN)     # Set all to green (enum)
+theta.led_clear()                    # Clear all
+theta.set_pixel(3, 0xff0000)         # Set LED 3 to red
+theta.led_rainbow(True)              # Rainbow pattern
+theta.led_brightness(100)            # Set brightness (0-255, default 40)
+theta.led_shift(False)               # Shift LEDs
+theta.led_rotate(True)               # Rotate LEDs
+theta.set_update_mode(RxMode.MANUAL) # Manual or Auto update mode
+theta.convert_rgb(50, 100, 200)      # Create color from RGB values
 ```
 
 #### Enums
 
-- `RXDirection`: `Forward`, `Reverse`
-- `RXRobotDirection`: `Left`, `Right`
-- `RXStopMode`: `Coast`, `Brake`
-- `RXMotor`: `Left`, `Right`, `Both`
-- `RXPingUnit`: `Centimeters`, `Inches`, `MicroSeconds`
-- `RXColors`: `Red`, `Green`, `Blue`, etc.
-- `RXMode`: `Manual`, `Auto`
+- `RxDirection`: `FORWARD`, `REVERSE`
+- `RxRobotDirection`: `LEFT`, `RIGHT`
+- `RxStopMode`: `COAST`, `BRAKE`
+- `RxMotor`: `LEFT`, `RIGHT`, `BOTH`
+- `RxPingUnit`: `CENTIMETERS`, `INCHES`, `MICRO_SECONDS`
+- `RxColors`: `RED`, `GREEN`, `BLUE`, etc.
+- `RxMode`: `MANUAL`, `AUTO`
 
 ### Important Rules for Examples
 
 - DO NOT invent or guess API functions - always refer to the documentation above or `reference/theta.ts`
-- Student code files go in `students/` directory with naming like `1-hello.py`, `2-turns.py`, etc.
-- Teacher guides go in `teachers/` directory with matching names like `1-hello.md`, `2-turns.md`, etc.
 - MakeCode Python doesn't need imports - `theta` and enums are globally available
 - LSP errors about undefined `theta` are expected (code runs on micro:bit, not PC)
 - Speed values are 0-100, durations are in milliseconds
+
+### File Organization: Module.Lesson System
+
+Tutorials are organized into **modules**, each containing multiple **lessons** that build on each other.
+
+**Naming Convention:** `M.L-name.py` / `M.L-name.md`
+- `M` = module number (1, 2, 3...)
+- `L` = lesson number within the module (1, 2, 3...)
+- `name` = kebab-case descriptive name
+
+**Examples:**
+- `students/1.1-forward.py` - Module 1, Lesson 1: Forward motion
+- `students/1.2-reverse.py` - Module 1, Lesson 2: Reverse motion
+- `teachers/1.1-forward.md` - Teacher guide for lesson 1.1
+
+**Directory Structure:**
+```
+students/           # Student code files
+  1.1-forward.py
+  1.2-reverse.py
+  1.3-spinning.py
+  ...
+teachers/           # Teacher guides (matching names)
+  1.1-forward.md
+  1.2-reverse.md
+  1.3-spinning.md
+  ...
+reference/          # API reference
+  theta.ts          # Full Theta library source
+```
+
+**Cumulative Code:** Each lesson file contains code from all previous lessons in that module, plus new code for the current lesson. Use section comments to separate:
+```python
+# === LESSON 1.1: Forward Motion ===
+<code from lesson 1.1>
+
+# === LESSON 1.2: Reverse Motion ===
+<new code for lesson 1.2>
+```
+
+**Dual Learning Objectives:** Each lesson teaches both:
+1. A **robot concept** (what the robot does)
+2. A **Python concept** (programming fundamentals)
+
+Teacher guides must cover both dimensions.
 
 ## Issue Tracking with bd (beads)
 
